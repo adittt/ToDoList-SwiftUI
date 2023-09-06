@@ -12,25 +12,36 @@ struct ToDoListItemView: View {
     let item: ToDoListItem
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(item.title)
-                    .font(.body)
-                
-                Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-            }
+        HStack (alignment: .center) {
+            Circle()
+                .strokeBorder(Color(hex: item.color) ?? .black, lineWidth: 8)
+                .frame(width: 35, height: 35)
+                .padding(.trailing, 10)
+            
+            Text(item.title)
+                .font(.body)
             
             Spacer()
             
-            Button {
-                viewModel.toggleIsDone(item: item)
-            } label: {
-                Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-            }
+            Image(systemName: "ellipsis")
+                .rotationEffect(.degrees(90))
 
         }
+        .padding()
+        .background(Rectangle().fill(.background))
+        .cornerRadius(10)
+        .shadow(color: .gray, radius: 3, x: 0, y: 0)
+        .overlay {
+            NavigationLink {
+                ToDoListDetail(userId: "rgbIACZmVkYmPjQm6U2IEfUc68U2", itemId: item.id)
+//                ToDoListDetail()
+            } label: {
+                EmptyView()
+            }
+            .opacity(0)
+
+        }
+        
     }
 }
 
@@ -39,8 +50,7 @@ struct ToDoListItemView_Previews: PreviewProvider {
         ToDoListItemView(item: .init(
             id: "asc",
             title: "Beli Aja",
-            dueDate: Date().timeIntervalSince1970,
-            createdDate: Date().timeIntervalSince1970,
-            isDone: true))
+            color: "#FFF")
+        )
     }
 }

@@ -14,7 +14,7 @@ class ProfileViewViewModel: ObservableObject {
     
     func toggleIsDone(item: ToDoListItem) {
         var itemCopy = item
-        itemCopy.setDone(!item.isDone)
+//        itemCopy.setDone(!item.isDone)
         
         guard let uid = Auth.auth().currentUser?.uid else {
             return

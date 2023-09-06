@@ -22,8 +22,7 @@ struct NewItemView: View {
                 TextField("Title", text: $viewModel.title)
                     .textFieldStyle(DefaultTextFieldStyle())
                 
-                DatePicker("Due Date", selection: $viewModel.dueDate)
-                    .datePickerStyle(.graphical)
+                ColorPicker("Color", selection: $viewModel.color)
                 
                 TLButton(title: "Save", background: .pink) {
                     if viewModel.canSave {

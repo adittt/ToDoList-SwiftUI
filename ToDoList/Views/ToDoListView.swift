@@ -24,23 +24,28 @@ struct ToDoListView: View {
             VStack {
                 List(items) { item in
                     ToDoListItemView(item: item)
+                        .buttonStyle(.plain)
                         .swipeActions {
                             Button("Delete") {
                                 viewModel.delete(id: item.id)
                             }
                             .tint(.red)
-
-
                         }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.white.opacity(0))
+                        
                 }
-                .listStyle(PlainListStyle())
+                .listStyle(.plain)
+
             }
+//            .background(Color("Background"))
             .navigationTitle("To Do List")
             .toolbar {
                 Button {
                     viewModel.showingNewItemView = true
                 } label: {
                     Image(systemName: "plus")
+                        .tint(Color(red: 98 / 255, green: 83 / 255, blue: 255 / 255))
                 }
 
             }

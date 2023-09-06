@@ -8,10 +8,11 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftUI
 
 class NewItemViewViewModel: ObservableObject {
     @Published var title = ""
-    @Published var dueDate = Date()
+    @Published var color = Color.black
     @Published var showAlert = false
     
     init() {}
@@ -31,9 +32,7 @@ class NewItemViewViewModel: ObservableObject {
         let newItem = ToDoListItem(
             id: newId,
             title: title,
-            dueDate: dueDate.timeIntervalSince1970,
-            createdDate: Date().timeIntervalSince1970,
-            isDone: false
+            color: color.toHex() ?? "#000"
         )
         
         // save model
@@ -49,10 +48,10 @@ class NewItemViewViewModel: ObservableObject {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }
-        
-        guard dueDate >= Date().addingTimeInterval(-86400) else {
-            return false
-        }
+
+//        guard !color.trimmingCharacters(in: .whitespaces).isEmpty else {
+//            return false
+//        }
         
         return true
     }
